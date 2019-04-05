@@ -1,9 +1,9 @@
 version: "3"
 services:
   web:
-    image: bwlkr/hello-world:v3
+    build: web
     deploy:
-      replicas: 25
+      replicas: 1
       resources:
         limits:
           cpus: "0.1"
@@ -12,7 +12,17 @@ services:
         condition: on-failure
     ports:
       - "8080:80"
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
     networks:
       - webnet
+      - redisnet
+  redis:
+    image: "redis:alpine"
+    networks:
+      - redisnet
 networks:
   webnet:
+  redisnet:
