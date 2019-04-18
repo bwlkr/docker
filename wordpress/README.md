@@ -1,0 +1,1 @@
+# Wordpress development image build on Alpine 8
