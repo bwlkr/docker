@@ -1,1 +1,1 @@
-# Wordpress development image build on Alpine 8
+# Wordpress development image built on Alpine
