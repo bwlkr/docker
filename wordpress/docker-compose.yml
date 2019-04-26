@@ -2,15 +2,15 @@ version: "3.7"
 
 services:
   wordpress:
-    container_name: core_wp
+    container_name: wp
     depends_on:
       - mysql
     build: .
     image: core:1.0
-    volumes:
-      - type: bind
-        source: ./WordPress
-        target: /var/www/html
+    #volumes:
+    #  - type: bind
+    #    source: ./WordPress
+    #    target: /var/www/html
     ports:
       - "80:80"
       - "443:443"
@@ -24,7 +24,7 @@ services:
 
   mysql:
     image: mysql:5.7
-    container_name: core_db
+    container_name: db
     volumes:
       - db_data:/var/lib/mysql
     restart: always

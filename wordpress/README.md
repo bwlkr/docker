@@ -1,0 +1,1 @@
+Run the following command to fix SELinux mounting issue: chcon -Rt svirt_sandbox_file_t WordPress/
