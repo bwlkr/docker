@@ -2,30 +2,38 @@ version: "3.7"
 
 services:
   wordpress:
-    container_name: wordpress
+    container_name: core_wp
     depends_on:
       - mysql
     build: .
-    image: blog:1.0
+    image: core:1.0
     volumes:
       - type: bind
-        source: ./source
-        target: /var/www/localhost/htdocs
+        source: ./WordPress
+        target: /var/www/html
     ports:
       - "80:80"
       - "443:443"
     restart: always
     env_file:
       - wordpress.env
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://0.0.0.0:12201
 
   mysql:
     image: mysql:5.7
-    #image: mysql:8.0.15
-    #command: '--default-authentication-plugin=mysql_native_password'
+    container_name: core_db
     volumes:
       - db_data:/var/lib/mysql
     restart: always
     env_file:
       - mysql.env
+    logging:
+      driver: gelf
+      options:
+        gelf-address: udp://0.0.0.0:12201
+
 volumes:
   db_data: {}
