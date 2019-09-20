@@ -8,10 +8,11 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock
+      - /var/run/docker.sock:/tmp/docker.sock:ro
       - nginx-certs:/etc/nginx/certs
       - nginx-vhost:/etc/nginx/vhost.d
       - nginx-html:/usr/share/nginx/html
+      - ./proxy.conf:/etc/nginx/proxy.conf
     networks:
       - core_net
   letsencrypt:
@@ -23,7 +24,7 @@ services:
       - nginx-vhost:/etc/nginx/vhost.d
       - nginx-html:/usr/share/nginx/html
     environment:
-      - "DEFAULT_EMAIL=default@mail.com"
+      - "DEFAULT_EMAIL=billynwalker@gmail.com"
       - "NGINX_PROXY_CONTAINER=nginx_proxy"
     networks:
       - core_net
@@ -34,5 +35,5 @@ networks:
 
 volumes:
   nginx-certs: {}
-  nginx-vhost: {}
   nginx-html: {}
+  nginx-vhost: {}
