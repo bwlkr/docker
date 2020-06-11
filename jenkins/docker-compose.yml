@@ -1,7 +1,8 @@
 version: '3'
 services:
   jenkins:
-    image: 'jenkinsci/blueocean'
+    container_name: jenkins
+    image: 'jenkins'
     ports:
       - '8080:8080'
       - '8443:8443'
